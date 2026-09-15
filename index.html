@@ -545,6 +545,28 @@
   .contact h2{ font-size:clamp(1.6rem, 3vw, 2.1rem); max-width:20ch; }
   .contact-actions{ display:flex; gap:14px; flex-wrap:wrap; }
 
+  .contact-fork{ position:relative; }
+  .contact-fork-menu{
+    position:absolute;
+    top:calc(100% + 8px); left:0;
+    min-width:160px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 14px 32px -18px rgba(18,23,26,0.35);
+    z-index:10;
+  }
+  .contact-fork-menu a{
+    display:block;
+    padding:12px 18px;
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--ink);
+    border-bottom:1px solid var(--line-soft);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .contact-fork-menu a:last-child{ border-bottom:none; }
+  .contact-fork-menu a:hover{ background:var(--brass); color:var(--ink); }
+
   footer{ padding:32px 24px; border-top:1px solid var(--line-soft); }
   .footer-inner{
     max-width:var(--maxw); margin:0 auto;
@@ -724,9 +746,15 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Have a project in mind? Let's talk about what you need.</h2>
-    <div class="contact-actions">
+      <div class="contact-actions">
       <a href="mailto:coligatech@gmail.com" class="btn btn-primary">Email Camille</a>
-      <a href="tel:+14707130671" class="btn btn-outline">Call to discuss</a>
+      <div class="contact-fork">
+        <button type="button" class="btn btn-outline" id="contactForkBtn" aria-haspopup="true" aria-expanded="false">Call or Text</button>
+        <div class="contact-fork-menu" id="contactForkMenu" hidden>
+          <a href="tel:+14707130671">Call</a>
+          <a href="sms:+14707130671">Text</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -756,6 +784,35 @@
       navToggle.classList.remove('is-open');
       navToggle.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  // "Call or Text" fork: clicking the button reveals two options (phone call vs. SMS)
+  // instead of the button committing to just one action.
+  const contactForkBtn = document.getElementById('contactForkBtn');
+  const contactForkMenu = document.getElementById('contactForkMenu');
+
+  contactForkBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !contactForkMenu.hidden;
+    contactForkMenu.hidden = isOpen;
+    contactForkBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close the menu if the user clicks anywhere outside it
+  document.addEventListener('click', (e) => {
+    if (!contactForkMenu.hidden && !contactForkMenu.contains(e.target) && e.target !== contactForkBtn) {
+      contactForkMenu.hidden = true;
+      contactForkBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close the menu on Escape for keyboard users
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !contactForkMenu.hidden) {
+      contactForkMenu.hidden = true;
+      contactForkBtn.setAttribute('aria-expanded', 'false');
+      contactForkBtn.focus();
+    }
   });
 </script>
 
