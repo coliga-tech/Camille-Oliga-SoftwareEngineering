@@ -99,6 +99,14 @@
     font-size:1.15rem;
     font-weight:600;
     color:var(--paper);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .nav-logo{
+    height:32px;
+    width:auto;
+    display:block;
   }
   .nav-mark .mark-accent{ color:var(--paper); opacity:0.82; }
 
@@ -582,7 +590,10 @@
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a href="#top" class="nav-mark">Camille <span class="mark-accent">Oliga</span></a>
+    <a href="#top" class="nav-mark">
+      <img src="coliga-logov2.png" alt="Coliga Tech logo" class="nav-logo">
+      Camille <span class="mark-accent">Oliga</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
