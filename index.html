@@ -267,9 +267,7 @@
     aspect-ratio:1/1;
     display:flex; align-items:center; justify-content:center;
   }
-  .hero-graphic svg{ width:100%; height:100%; max-width:360px; }
-  .wave-path{ stroke:var(--brass); stroke-width:1.8; fill:none; }
-  .wave-accent{ stroke:var(--brass); stroke-width:2.4; fill:none; }
+  .hero-graphic .hero-logo{ width:100%; height:auto; max-width:360px; display:block; }
 
   @media (max-width: 820px){
     .hero .wrap{ grid-template-columns:1fr; }
@@ -584,6 +582,17 @@
     flex-wrap:wrap; gap:12px;
     font-size:0.85rem; color:var(--ink-soft);
   }
+
+  .footer-brand{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .footer-logo{
+    height:20px;
+    width:auto;
+    display:block;
+  }
 </style>
 </head>
 <body>
@@ -618,12 +627,7 @@
       </div>
     </div>
     <div class="hero-graphic" aria-hidden="true">
-      <!-- A waveform that settles into a code bracket: audio engineering meets software engineering -->
-      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-        <path class="wave-path" d="M20 160 L60 160 L75 100 L95 220 L115 60 L135 240 L155 160 L200 160"/>
-        <path class="wave-accent" d="M200 160 L220 160 L235 130 L250 190 L265 160 L300 160"/>
-        <text x="20" y="270" font-family="IBM Plex Mono, monospace" font-size="15" fill="#3D454B">&lt; build /&gt;</text>
-      </svg>
+      <img src="coliga-logov4.png" alt="" class="hero-logo">
     </div>
   </div>
 </header>
@@ -774,7 +778,7 @@
 
 <footer>
   <div class="footer-inner">
-    <span>Camille Oliga — Full-Stack Web Development</span>
+    <span class="footer-brand"><img src="coliga-logov4.png" alt="Coliga Tech logo" class="footer-logo">Camille Oliga — Full-Stack Web Development</span>
     <span>Atlanta, GA</span>
   </div>
 </footer>
